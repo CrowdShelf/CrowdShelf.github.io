@@ -45,7 +45,7 @@
     </head>
     <body>
 
-        <div class="container" ng-init="currentState = 'survey'">
+        <div class="container" ng-init="currentState = 'examples'">
             <section class="header">
                 <h2 class="title">CrowdShelf</h2>
                 <h4>Share your knowledge — Share your books</h4>
@@ -54,7 +54,7 @@
 
                 <nav>
                     <span class="button" ng-click="currentState = 'examples'">Examples</span>
-                    <span class="button" ng-click="currentState = 'survey'">Survey</span>
+                    <span class="button" ng-click="currentState = 'design'">Design Versions</span>
                 </nav>
                 <br>
                 <br>
@@ -92,18 +92,37 @@
                 </div>
 
 
-                <div ng-show="currentState == 'survey'" ng-init="formData = {}; questionIndex = 0; questionIDs= [452555678, 123]; alternativesForQuestion = {452555678: ['Tabbar', 'Swipe gesture', 'Side menu'], 123: ['Hei', 'Hå']}">
-                    <div class="radio-group" ng-show="questionID == questionIDs[questionIndex]" ng-repeat="questionID in questionIDs">
-                        <label ng-repeat="alternative in alternativesForQuestion[questionID]">
-                            <input  type="radio" 
-                                    name="{{questionID}}" 
-                                    ng-model="formData[questionID]" 
-                                    value="{{alternative}}"/> 
-                                {{alternative}}
-                        </label>
+                <div ng-show="currentState == 'design'" >
+                    <h4>Shelf View Versions</h4>
+                    <div class="row">   
+                        <div class = "one-third column">
+                            <img  src="images/ShelfViewV1.gif"  height="200" width="150">
+                            <p>Switch between "My Books" and "Borrowed Books" </p>
+                        </div>
+                       
+                        <div class = "one-third column">
+                            <img  src="images/ShelfViewV2.gif" height="200" width="140">
+                             <p>A list button at the top to choose different views</p>
+                        </div>
+                        
+                        <div class = "one-third column">
+                            <img  src="images/ShelfViewV3.gif" height="200" width="130">
+                             <p>List View, click "See all" to see all</p>
+                        </div> 
+                    </div>   
+                    <h4>Crowd View Versions</h4>
+                    <div class="row">
+                        <div class="one-half column">
+                            <img  src="images/CrowdViewV1.gif" height="200" width="130">
+                            <p>Icon View</p>
+                        </div>
+                        
+                        <div class="one-half column">
+                            <img  src="images/CrowdViewV2.gif" height="200" width="130">
+                            <p>List View</p>
+                        </div>
                     </div>
-
-                    <button type="submit" onclick="postContactToGoogle();">Send</button>
+    
                 </div>
                 <br> <br>
             </section>
