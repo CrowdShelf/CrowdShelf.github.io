@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app>
     <head>
 
     <meta charset="utf-8">
@@ -14,49 +14,98 @@
     <link rel="stylesheet" href="dist/css/skeleton.css">
     <link rel="stylesheet" href="css/custom.css">
 
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
     <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
     <link rel="stylesheet" href="css/github-prettify-theme.css">
 
     <link rel="icon" type="image/png" href="dist/images/favicon.png">
 
+
+    <script type="text/javascript">
+        function postContactToGoogle(){
+            $.ajax({
+                url: "https://docs.google.com/forms/d/1EryQMrocUUef2PtBVah67YeMV6ZpGhXPPUQWQkSsKpk/formResponse",
+                data: {"entry.452555678" : "Tabbar"},
+                type: "POST",
+                dataType: "xml",
+                statusCode: {
+                    0: function () {
+                        // window.location.replace("ThankYou.html");
+                    },
+                    200: function () {
+                        // window.location.replace("ThankYou.html");
+                    }
+                }
+            });
+        }
+    </script>
+
+
     </head>
     <body>
 
-        <div class="container">
+        <div class="container" ng-init="currentState = 'survey'">
             <section class="header">
                 <h2 class="title">CrowdShelf</h2>
                 <h4>Share your knowledge — Share your books</h4>
-                <br><br>
-                <div class="row">
-                    <div class = "one-half column">
-                        <iframe width="300" height="215" src="https://www.youtube.com/embed/6Nedobb4eZ0" 
-                            frameborder="0" allowfullscreen>
-                        </iframe>
-                        <h4>Company Example</h4>
-                        <p>This is an example to illustrate how we vision this application can be used from a company's perspective</p>
+                <br>
+                <br>
+
+                <nav>
+                    <span class="button" ng-click="currentState = 'examples'">Examples</span>
+                    <span class="button" ng-click="currentState = 'survey'">Survey</span>
+                </nav>
+                <br>
+                <br>
+
+
+
+                <div ng-show="currentState == 'examples'">
+                    <div class="row">
+                        <div class = "one-half column">
+                            <iframe width="300" height="215" src="https://www.youtube.com/embed/6Nedobb4eZ0" 
+                                frameborder="0" allowfullscreen>
+                            </iframe>
+                            <h4>Company Example</h4>
+                            <p>This is an example to illustrate how we vision this application can be used from a company's perspective</p>
+                        </div>
+
+                        <div class = "one-half column">
+                            <iframe width="300" height="215" src="https://www.youtube.com/embed/yj0NNimKgIw" 
+                                frameborder="0" allowfullscreen>
+                            </iframe>
+                            <h4>Student Example</h4>
+                            <p>This is an example to illustrate how we vision this application can be used from a student's perspective</p>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <iframe src="https://docs.google.com/forms/d/17tD_Nk5t-WGkvYZD7NLr-L-RDAVC8VlRkYAf_cNECaI/viewform?embedded=true"
+                            width="650"
+                            height="840"
+                            frameborder="0"
+                            marginheight="0"
+                            marginwidth="0">
+                        Loading ..
+                    </iframe>
+                </div>
+
+
+                <div ng-show="currentState == 'survey'" ng-init="formData = {}; questionIndex = 0; questionIDs= [452555678, 123]; alternativesForQuestion = {452555678: ['Tabbar', 'Swipe gesture', 'Side menu'], 123: ['Hei', 'Hå']}">
+                    <div class="radio-group" ng-show="questionID == questionIDs[questionIndex]" ng-repeat="questionID in questionIDs">
+                        <label ng-repeat="alternative in alternativesForQuestion[questionID]">
+                            <input  type="radio" 
+                                    name="{{questionID}}" 
+                                    ng-model="formData[questionID]" 
+                                    value="{{alternative}}"/> 
+                                {{alternative}}
+                        </label>
                     </div>
 
-                    <div class = "one-half column">
-                        <iframe width="300" height="215" src="https://www.youtube.com/embed/yj0NNimKgIw" 
-                            frameborder="0" allowfullscreen>
-                        </iframe>
-                        <h4>Student Example</h4>
-                        <p>This is an example to illustrate how we vision this application can be used from a student's perspective</p>
-                    </div>
-               
-                
+                    <button type="submit" onclick="postContactToGoogle();">Send</button>
                 </div>
                 <br> <br>
-               
-
-                <iframe src="https://docs.google.com/forms/d/17tD_Nk5t-WGkvYZD7NLr-L-RDAVC8VlRkYAf_cNECaI/viewform?embedded=true"
-                        width="650"
-                        height="840"
-                        frameborder="0"
-                        marginheight="0"
-                        marginwidth="0">
-                    Loading ..
-                </iframe>
             </section>
         </div>
     </body>
