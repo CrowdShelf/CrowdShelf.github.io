@@ -8,13 +8,16 @@
 
 	min-width: 15rem;
 }
+.fixed-menu li{
+	list-style-type: none;
+}
 .background{
 	height:  0;
 }
 .background img{
 	opacity: 0.4;
 	width: 100%;
-	height: 50rem;
+	height: 70rem;
 }
 .button{
 	background-color: white;
